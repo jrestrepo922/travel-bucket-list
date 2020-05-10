@@ -9,5 +9,5 @@ use Rack::MethodOverride
 use UsersController
 use CountriesController
 use CitiesController
+use SessionsController
 run ApplicationController
-#test
