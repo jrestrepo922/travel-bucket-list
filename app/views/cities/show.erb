@@ -1,0 +1,25 @@
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_show.css" />
+<h2>Your current Destination!</h2>
+
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <h2><%=@country[:name] %></h2>
+            <% @country.cities.each do |city| %> 
+                <h3><%= city.name%></h3>
+                <p><%=  city.trip_details %></p>
+            <%end%>
+ 
+    
+            
+            <a href="/cities/<%= @country.id %>/edit"><button class="btn edit" >Edit</button></a>
+            
+            <a href="/cities"><button class="btn list">My List<button></a>
+
+            <form method="POST" action="/cities/<%= @country.id %>">
+            <input type="hidden" id="hidden" name="_method" value="DELETE">
+            <input type="submit" value="delete" class="btn delete">
+            </form>
+        </div>
+    </div>
+</div>

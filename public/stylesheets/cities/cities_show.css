@@ -9,14 +9,12 @@
   /* Float four columns side by side */
   .column {
     float: left;
-    width: 50%;
+    width: 100%;
     padding: 10px 10px;
   }
   
   /* Remove extra left and right margins, due to padding */
-  .row {
-    margin: 0 -5px;
-  }
+  .row {margin: 0 -5px;}
   
   /* Clear floats after the columns */
   .row:after {
@@ -45,9 +43,9 @@
  h2 a {
     text-decoration: none; 
     color: black;
-    
   }
 
+/*buttons */
 
   .btn {
     border: 2px solid black;
@@ -56,24 +54,45 @@
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
+    margin: 0px 10px
   }
 
-  /* Gray */
-.logout {
-  border-color: #e7e7e7;
-  color: black;
-}
 
-.logout:hover {
-  background: #e7e7e7;
-}
+  /* Red */
+.delete {
+    margin: -1px -1px;
+    border-color: #f44336;
+    color: red;
+  }
+  
+  .delete:hover {
+    background: #f44336;
+    color: white;
+  }
 
-#main {
-  display: inline;
-}
+  /* Orange */
+.edit {
+    border-color: #ff9800;
+    color: orange;
+  }
+  
+  .edit:hover {
+    background: #ff9800;
+    color: white;
+  }
 
-#logout {
-  position: relative;
-  left: 300px;
-  top: 0px;
-}
+  /* Green */
+.list {
+    margin-right: 20px;
+    border-color: #4CAF50;
+    color: green;
+  }
+  
+  .list:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  form {
+      display: inline;
+  }

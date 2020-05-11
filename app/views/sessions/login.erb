@@ -1,9 +1,16 @@
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/users/login.css" />
+<div class="container">
 <h2>Login to Your Account</h2>
-
-<form method="POST" action="/login">
-    <label for="username">Username</label>
-    <input type="text" name="username">
-    <label for="password">Password</label>
-    <input type="password" name="password">
-    <input type="submit">
-</form>
+    <form method="POST" action="/login">
+        <div class="container">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Enter Username">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Enter Password">
+            <input type="submit" class="loginbtn" value="Log In">
+        </div>
+    </form>
+</div>
+<div class="container signin">
+<p>Do not have an account? <a href="/signup">Sign up</a>.</p>
+</div>
