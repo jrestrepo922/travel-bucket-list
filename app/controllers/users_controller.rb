@@ -8,7 +8,7 @@ class UsersController < ApplicationController
         user = User.new(params)
         if user.save 
             session[:user_id] = user.id
-            redirect '/countries'
+            redirect '/cities'
         else 
             redirect '/signup'
         end 
