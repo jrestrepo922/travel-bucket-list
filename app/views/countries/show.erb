@@ -1,4 +1,4 @@
-<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_show.css" />
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/countries/countries_show.css" />
 <h2>Your current Destination!</h2>
 
 <div class="row">
@@ -12,11 +12,11 @@
  
 
             
-            <a href="/cities/<%= @country.id %>/edit"><button class="btn edit">Edit</button></a>
+            <a href="/countries/<%= @country.id %>/cities/edit"><button class="btn edit">Edit</button></a>
             
-            <a href="/cities"><button class="btn list">My List<button></a>
+            <a href="/countries/cities"><button class="btn list">My Countries List<button></a>
 
-            <form method="POST" action="/cities/<%= @country.id %>">
+            <form method="POST" action="/countries/<%= @country.id %>/cities">
             <input type="hidden" id="hidden" name="_method" value="DELETE">
             <input type="submit" value="delete" class="btn delete">
             </form>

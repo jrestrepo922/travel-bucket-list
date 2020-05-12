@@ -1,13 +1,12 @@
-<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_index.css"/>
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/countries/countries_index.css"/>
 
 
 
 
 <div class="topnav">
   <a href='/logout'>Log out</a>
-  <a href="/cities/new">New City</a>
-  <a href="/countries/new">New Country</a>
-  <a href="/everyone">Everyones List</a>
+  <a href="/countries/cities/new">New Country/City</a>
+  <a href="/cities">All my cities</a>
   
 </div>
 
@@ -20,10 +19,10 @@
     <div class="column">
         <div class="card">
            
-            <h2><a href="/cities/<%=country[:id]%>"><%=country[:name] %></a></h2>
+            <h2><a href="/countries/<%=country[:id]%>/cities"><%=country[:name] %></a></h2>
             <% country.cities.each do |city| %> 
                 <h3><%= city.name%></h3>
-                <p><%=  city.trip_details %></p>
+                
             <%end%>
         </div>
     </div>
