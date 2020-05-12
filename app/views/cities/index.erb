@@ -1,10 +1,24 @@
-<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_index.css" />
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_index.css"/>
+
+
+
+
+<div class="topnav">
+  <a href="/cities/new">New City</a>
+  <a href="/countries/new">New Country</a>
+  <a href='/logout'>Log out</a>
+</div>
+
 <h2>Travel Bucket List!</h2>
+
+
+
 <div class="row">
   <% @countries.each do |country| %> 
     <div class="column">
         <div class="card">
-            <h2><a href="/cities/<%=country[:id]%>"><%=country[:name] %></a> </h2>
+           
+            <h2><a href="/cities/<%=country[:id]%>"><%=country[:name] %></a></h2>
             <% country.cities.each do |city| %> 
                 <h3><%= city.name%></h3>
                 <p><%=  city.trip_details %></p>
@@ -12,6 +26,5 @@
         </div>
     </div>
  <%end%>
- <div id="logout"><a href="/cities"><button class="btn list">My List<button></a> </div>
 </div>
 

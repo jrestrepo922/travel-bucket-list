@@ -77,11 +77,16 @@ class CitiesController < ApplicationController
 
     #EDIT
     get "/cities/:id/edit" do 
-        erb :"/cities/edit"
+        if logged_in?
+            @country = current_user.countries.find_by(id: params[:id])
+            erb :"/cities/edit"
+        else 
+            redirect "/login"
+        end 
     end
 
     patch "/cities/:id" do 
-        
+        binding.pry 
     end 
 
     #DELETE
