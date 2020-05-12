@@ -9,12 +9,13 @@ class UsersController < ApplicationController
 
     post '/signup' do 
         # we will need to add validation. Whatever that means. 
-        user = User.new(params)
-        if user.save 
-            session[:user_id] = user.id
+        @user = User.new(params)
+        if @user.save 
+            session[:user_id] = @user.id
             redirect '/cities'
-        else 
-            redirect '/signup'
+        else binding.pry
+            erb :"users/new"
+            #redirect '/signup'
         end 
     end 
 end 

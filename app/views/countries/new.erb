@@ -1,0 +1,48 @@
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_new.css" />
+<form action="/cities" method="POST">
+
+<div class="topnav">
+  <a href="/cities">See my List</a>
+</div>
+
+<div class="container">
+  <h1>Create a Bucket List Item!</h1>
+  <br>
+  <label for="country[name_exist]" class="country"> Existing Country</label>
+
+  <select name="country[name_exist]">
+    <option value=""> -- select an option -- </option>
+    <option style="display:none">
+    <% @countries.each do |country|%>
+    <option value="<%= country.name %>"><%= country.name %></option>
+    <%end%>
+  </select>
+
+  <h3> OR </h3>
+  <br>
+  <label for="country[name_new]" class="country">New Country</label></br>
+  <input type="text" name="country[name_new]" placeholder="Country you want to visit"></br>
+
+  <h3>Cities</h3>
+  <hr>
+  <label for="country[cities][][name]">City No. 1 (Required)</label></br></br>
+  <input type="text" name="country[cities][][name]" placeholder="City you want to visit"></br>
+
+  <label for="country[cities][][trip_details]">Trip Details (Required)</label></br>
+  <textarea name="country[cities][][trip_details]" placeholder="What would you like to do?"></textarea></br>
+
+  <label for="country[cities][][name]">City No. 2</label></br></br>
+  <input type="text" name="country[cities][][name]" placeholder="City you want to visit"></br>
+
+  <label for="country[cities][][trip_details]">Trip Details</label></br>
+  <textarea name="country[cities][][trip_details]" placeholder="What would you like to do?"></textarea></br>
+
+  <label for="country[cities][][name]">City No. 3</label></br></br>
+  <input type="text" name="country[cities][][name]" placeholder="City you want to visit"></br>
+
+  <label for="country[cities][][trip_details]">Trip Details</label></br>
+  <textarea name="country[cities][][trip_details]" placeholder="What would you like to do?"></textarea></br>
+  <hr>
+
+  <input type="submit" value="Create" class="submitbtn">
+</form>
