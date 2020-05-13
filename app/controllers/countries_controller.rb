@@ -77,10 +77,8 @@ class CountriesController < ApplicationController
     #READ
     get "/countries" do 
         if logged_in? 
-            
-
-            @countries = current_user.countries.first.cities.select {|c| c.user_id == current_user.id  }
-            binding.pry
+            @countries = current_user.countries.uniq
+            #.first.cities.select {|c| c.user_id == current_user.id  }
             erb :"/countries/index"
         else 
             redirect "/login"

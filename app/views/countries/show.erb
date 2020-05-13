@@ -6,8 +6,10 @@
         <div class="card">
             <h2><%=@country[:name] %></h2>
             <% @country.cities.each do |city| %> 
-                <h3><%= city.name%></h3>
-                <p><%=  city.trip_details %></p>
+                <% if city.user_id == current_user.id %> 
+                    <h3><%= city.name%></h3>
+                    <p><%=  city.trip_details %></p>
+                <% end %>
             <%end%>
  
 

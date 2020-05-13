@@ -19,14 +19,14 @@
     <div class="column">
         <div class="card">
            
-            <h2><a href="/countries/<%=country[:id]%>"><%=country[:name] %></a></h2>
-           # <% country.cities.each do |city| %> 
-           <% country.cities.each do |city| %> 
-                <h3><%= city.name%></h3>
-                
-            <%end%>
+           <h2><a href="/countries/<%=country[:id]%>"><%=country[:name] %></a></h2>
+           <% country.cities.each do |city| %>
+              <% if city.user_id == current_user.id %> 
+                <h3><%= city.name%></h3> 
+              <%end%>
+           <%end%>
         </div>
     </div>
- <%end%>
+  <%end%>
 </div>
 
