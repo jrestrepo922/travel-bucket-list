@@ -17,28 +17,37 @@ class CountriesController < ApplicationController
             # this is the find 
             if !params[:country][:name_exist].empty?
                 cities_array = params[:country][:cities]
-                country = current_user.countries.find_by(name: params[:country][:name_exist])
+                country = Country.find_by(name: params[:country][:name_exist])
+                #this does not work anymore since that country does not belong to a user.
+                #country = current_user.countries.find_by(name: params[:country][:name_exist])
                 # if stament here when no cities are provided and associated them to the user
-                if cities_array[0][:name].empty? || cities_array[0][:name].empty?
+                binding.pry
+                #cities empty and details are empty
+                if cities_array[0][:name].empty? && cities_array[1][:name].empty? && cities_array[2][:name].empty?
                     redirect '/countries/cities/new'
-                end
+                end 
+                
+                #cities provided with trip details or no trip details
+
                 cities_array.each { |city|
-                if !city[:name].empty? && !city[:trip_details].empty?
-                    new_city = current_user.cities.create(name: city[:name], trip_details: city[:trip_details])
+                if !city[:name].empty? 
+                    new_city = current_user.cities.create(name: city[:name].titleize, trip_details: city[:trip_details])
                     country.cities << new_city 
                 end 
                 }
-            # if the existing country is empty. Create a new one
-            elsif !params[:country][:name_new].empty?
+
+            # if the existing country is empty and if the country you are creating does not already exist. Create a new one
+           
+            elsif !params[:country][:name_new].empty? && !Country.find_by(name: params[:country][:name_new])
                 cities_array = params[:country][:cities]
                 if cities_array[0][:name].empty? || cities_array[0][:name].empty?
                     redirect '/countries/cities/new'
                 end
-                country = current_user.countries.build(name: params[:country][:name_new])
+                country = current_user.countries.build(name: params[:country][:name_new].titleize)
                 if country.save
                     cities_array.each { |city|
                         if !city[:name].empty? && !city[:trip_details].empty?
-                            new_city = current_user.cities.create(name: city[:name], trip_details: city[:trip_details])
+                            new_city = current_user.cities.create(name: city[:name].titleize, trip_details: city[:trip_details])
                             country.cities << new_city 
                         end 
                     }
@@ -47,7 +56,7 @@ class CountriesController < ApplicationController
             else
                 
                 redirect '/countries/cities/new'
-            end 
+            end
             redirect '/countries/cities'
 
         else 
