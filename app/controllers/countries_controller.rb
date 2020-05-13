@@ -43,10 +43,12 @@ class CountriesController < ApplicationController
                     #Trip details are filled 
                     if !cities_array[0][:trip_details].empty? || !cities_array[1][:trip_details].empty? || !cities_array[2][:trip_details].empty?
 
-                        redirect '/countries/cities/new'
+                        redirect '/countries/new'
                     else 
-                        country = current_user.countries.create(name: params[:country][:name_new].titleize)                  
-                        redirect "/countries/#{country.id}/cities"
+                        country = current_user.countries.create(name: params[:country][:name_new].titleize)
+#binding.pry
+                        # Creates a Country that belongs to an User but does not have any cities             
+                        redirect "/countries/#{country.id}"
                     end 
                 else # cities are provided with or without trip_details
                     country = current_user.countries.create(name: params[:country][:name_new].titleize)
@@ -108,8 +110,20 @@ class CountriesController < ApplicationController
         if logged_in? 
             @country = current_user.countries.find_by(id: params[:id]) 
             if @country
-                # country is change 
-                if @country.name != params[:country][:name_new]
+                # country is change and it does not have cities
+                if @country.name != params[:country][:name_new] && !params[:country][:cities]
+                    if params[:country][:name_new].empty?
+                        redirect "/countries/#{@country.id}/edit"
+                    end
+                    # need to check to see if the country already exist 
+                    if Country.find_by(name: params[:country][:name_new])
+                        redirect "/countries/#{@country.id}/edit"
+                    end 
+                    @country.update(name: params[:country][:name_new])
+                    redirect "/countries/#{@country.id}"               
+                # country is change and it has cities
+                elsif @country.name != params[:country][:name_new]
+                binding.pry
                     # will need to check if is submitted empty
                     if params[:country][:name_new].empty?
                         redirect "/countries/#{@country.id}/edit"
@@ -126,7 +140,10 @@ class CountriesController < ApplicationController
                         end 
                     end 
                     redirect "/countries/#{@country.id}"
-                # country is the same 
+                
+                #country is the same but does not have cites
+
+                # country is the same and has cites
                 elsif @country.name == params[:country][:name_new]
 
                     @country.cities.each_with_index do |city, index|

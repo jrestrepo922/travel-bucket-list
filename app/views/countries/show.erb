@@ -12,15 +12,16 @@
                 <% end %>
             <%end%>
  
-
             
-            <a href="/countries/<%= @country.id %>/edit"><button class="btn edit">Edit</button></a>
+            <a href="/countries/<%= @country.id %>/cities/new"><button class="btn edit">Add City<button></a>
+
+            <a href="/countries/<%= @country.id %>/edit"><button class="btn edit">Edit Cities</button></a>
             
             <a href="/countries"><button class="btn list">My Countries List<button></a>
 
             <form method="POST" action="/countries/<%= @country.id %>">
             <input type="hidden" id="hidden" name="_method" value="DELETE">
-            <input type="submit" value="delete" class="btn delete">
+            <input type="submit" value="Delete Country" class="btn delete">
             </form>
         </div>
     </div>

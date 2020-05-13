@@ -1,30 +1,31 @@
-<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_new.css" />
-<form action="/cities/<%= @country.id %>" method="POST">
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/countries/countries_edit.css" />
+<form action="/countries/<%= @country.id %>" method="POST">
 <input type="hidden" id="hidden" name="_method" value="PATCH">
 
 <div class="topnav">
-  <a href="/cities">See my List</a>
+  <a href="/countries">See My Countries</a>
 </div>
 
 <div class="container">
-  <h1>Update a Bucket List Item!</h1>
+  <h1>Update Cities In <%=@country.name%>  !</h1>
   <br>
   
-  <label for="country[name_new]" class="country">Country</label></br>
-  <input type="text" name="country[name_new]" value="<%=@country.name%>"></br>
+    <h2>Cities</h2>
+    <%count = 1 %>
+    <% @country.cities.each do |city| %>
+      <% if city.user_id == current_user.id %>
 
-  <h3>Cities</h3>
-  <hr>
-  <% count = 1 %>
-  <% @country.cities.each do |city| %>
-    <label for="country[cities][][name]">City No. <%=count%></label></br></br>
-    <input type="text" name="country[cities][][name]" value="<%=city.name%>"></br>
+        <% if city.name  %>
+          <label for="country[cities][][name]">City No. <%=count%></label></br></br>
+          <input type="text" name="country[cities][][name]" value="<%=city.name%>"></br>
 
-    <label for="country[cities][][trip_details]">Trip Details</label></br>
-    <input  type="text" name="country[cities][][trip_details]" value="<%=city.trip_details%>"></textarea></br>
-        <% count += 1 %>
-  <%end%>
-  <hr>
-
+          <label for="country[cities][][trip_details]">Trip Details</label></br>
+          <input  type="text" name="country[cities][][trip_details]" value="<%=city.trip_details%>"></textarea></br>
+          <% count = count + 1 %>
+        <%end%>
+      <%end%>
+    <%end%>
+    
+  
   <input type="submit" value="Update" class="submitbtn">
 </form>

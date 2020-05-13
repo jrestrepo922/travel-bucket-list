@@ -1,0 +1,20 @@
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_new.css" />
+<form action="/countries/<%= @country.id %>/cities" method="POST">
+
+<div class="topnav">
+  <a href="/countries">See My Countries</a>
+</div>
+
+<div class="container">
+  <h1>Add City to <%=@country.name%>!</h1>
+  <br>
+  
+    <h2>City</h2>
+    <label for="country[cities][][name]">City Name: </label></br></br>
+    <input type="text" name="country[cities][][name]" placeholder="City you want to visit"></br>
+  
+    <label for="country[cities][][trip_details]">Trip Details: </label></br>
+    <textarea name="country[cities][][trip_details]" placeholder="What would you like to do?"></textarea></br>
+
+    <input type="submit" value="Create" class="submitbtn">
+</form>
