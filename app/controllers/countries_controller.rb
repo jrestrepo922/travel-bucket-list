@@ -21,14 +21,12 @@ class CountriesController < ApplicationController
                 #this does not work anymore since that country does not belong to a user.
                 #country = current_user.countries.find_by(name: params[:country][:name_exist])
                 # if stament here when no cities are provided and associated them to the user
-                binding.pry
-                #cities empty and details are empty
+                #cities empty with no trip deatils or trip details
                 if cities_array[0][:name].empty? && cities_array[1][:name].empty? && cities_array[2][:name].empty?
                     redirect '/countries/cities/new'
                 end 
                 
                 #cities provided with trip details or no trip details
-
                 cities_array.each { |city|
                 if !city[:name].empty? 
                     new_city = current_user.cities.create(name: city[:name].titleize, trip_details: city[:trip_details])
@@ -37,11 +35,12 @@ class CountriesController < ApplicationController
                 }
 
             # if the existing country is empty and if the country you are creating does not already exist. Create a new one
-           
             elsif !params[:country][:name_new].empty? && !Country.find_by(name: params[:country][:name_new])
                 cities_array = params[:country][:cities]
-                if cities_array[0][:name].empty? || cities_array[0][:name].empty?
-                    redirect '/countries/cities/new'
+                # all cities are empty still create the Country
+                if cities_array[0][:name].empty? && cities_array[1][:name].empty? && cities_array[2][:name].empty?
+                    country = current_user.countries.create(name: params[:country][:name_new].titleize)                  
+                    redirect "/countries/#{country.id}/cities"
                 end
                 country = current_user.countries.build(name: params[:country][:name_new].titleize)
                 if country.save
@@ -57,7 +56,7 @@ class CountriesController < ApplicationController
                 
                 redirect '/countries/cities/new'
             end
-            redirect '/countries/cities'
+            redirect "/countries/#{country.id}/cities"
 
         else 
             redirect "/login"

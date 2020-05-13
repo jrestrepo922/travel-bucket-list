@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     if logged_in?
-      redirect "/cities"
+      redirect "/countries/cities"
     else
       erb :welcome
     end 
@@ -29,6 +29,7 @@ class ApplicationController < Sinatra::Base
 
   end 
 
+# Will likely be taken out
   #Read
   get "/everyone" do 
     if logged_in? 
