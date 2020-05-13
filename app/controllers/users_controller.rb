@@ -1,7 +1,7 @@
 class UsersController < ApplicationController 
     get '/signup' do 
         if logged_in?
-            redirect "/countries/cities"
+            redirect "/countries"
         else 
             erb :"users/new"
         end 
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         @user = User.new(params)
         if @user.save 
             session[:user_id] = @user.id
-            redirect 'countries/cities'
+            redirect '/countries'
         else binding.pry
             erb :"users/new"
             #redirect '/signup'

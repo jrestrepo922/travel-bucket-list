@@ -5,7 +5,7 @@
 
 <div class="topnav">
   <a href='/logout'>Log out</a>
-  <a href="/countries/cities/new">New Country/City</a>
+  <a href="/countries/new">New Country/City</a>
   <a href="/cities">All my cities</a>
   
 </div>
@@ -19,8 +19,9 @@
     <div class="column">
         <div class="card">
            
-            <h2><a href="/countries/<%=country[:id]%>/cities"><%=country[:name] %></a></h2>
-            <% country.cities.each do |city| %> 
+            <h2><a href="/countries/<%=country[:id]%>"><%=country[:name] %></a></h2>
+           # <% country.cities.each do |city| %> 
+           <% country.cities.each do |city| %> 
                 <h3><%= city.name%></h3>
                 
             <%end%>

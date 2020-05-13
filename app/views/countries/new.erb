@@ -1,13 +1,14 @@
 <link rel = "stylesheet" type = "text/css" href = "/stylesheets/countries/countries_new.css" />
-<form action="/countries/cities" method="POST">
+<form action="/countries" method="POST">
 
 <div class="topnav">
-  <a href="/countries/cities">See my List</a>
+  <a href="/countries">See My Country List</a>
 </div>
 
 <div class="container">
   <h1>Create a Bucket List Item!</h1>
   <br>
+  
   <label for="country[name_exist]" class="country"> Existing Country</label>
 
   <select name="country[name_exist]">
@@ -25,10 +26,10 @@
 
   <h3>Cities</h3>
   <hr>
-  <label for="country[cities][][name]">City No. 1 (Required)</label></br></br>
+  <label for="country[cities][][name]">City No. 1 </label></br></br>
   <input type="text" name="country[cities][][name]" placeholder="City you want to visit"></br>
 
-  <label for="country[cities][][trip_details]">Trip Details (Required)</label></br>
+  <label for="country[cities][][trip_details]">Trip Details </label></br>
   <textarea name="country[cities][][trip_details]" placeholder="What would you like to do?"></textarea></br>
 
   <label for="country[cities][][name]">City No. 2</label></br></br>

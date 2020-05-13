@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
     get "/login" do 
         if logged_in? 
-            redirect "/countries/cities"
+            redirect "/countries"
         else 
             erb :'sessions/login'
         end
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 
         if user && user.authenticate(params[:password]) #where is this coming from bcrypt and has_secure_passwrod
             session[:user_id] = user.id #once this line is executed the user is log in. 
-            redirect "countries/cities"
+            redirect "/countries"
         else  
             redirect "/login"
         end 
