@@ -17,10 +17,10 @@ class ApplicationController < Sinatra::Base
     end 
   end
 
-  helpers do #gives access to the controller and the views 
+  helpers do 
     
     def logged_in?
-       !!session[:user_id]    # True , !true = false, !!true = true
+       !!session[:user_id]    
     end
 
     def current_user

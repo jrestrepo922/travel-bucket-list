@@ -3,7 +3,6 @@ class CountriesController < ApplicationController
     #CREATE
     get "/countries/new" do 
         if logged_in?
-            # This allow us to pick from any country Created
             @countries = Country.all
             erb :"/countries/new"
         else 
@@ -13,18 +12,14 @@ class CountriesController < ApplicationController
     
     post "/countries" do 
         if logged_in?
-            # if the existing country is not empty. No need to create a country
-            # this is the find 
+            # if the existing country is not empty, No need to create a country
             if !params[:country][:name_exist].empty?
                 cities_array = params[:country][:cities]
                 country = Country.find_by(name: params[:country][:name_exist])
-                #this does not work anymore since that country does not belong to a user.
-                #country = current_user.countries.find_by(name: params[:country][:name_exist])
-                # if stament here when no cities are provided and associated them to the user
                 #cities empty with no trip deatils or trip details
                 if cities_array[0][:name].empty? && cities_array[1][:name].empty? && cities_array[2][:name].empty?
                     if !current_user.countries.find_by(name: country.name)
-                        #create the association 
+                        #create the association from user to country
                          current_user.countries << country
                          "/countries/#{country.id}"
                     else 
@@ -40,7 +35,7 @@ class CountriesController < ApplicationController
                 end 
                 }
 
-            # if the existing country is empty and if the country you are creating does not already exist. Create a new one
+            # if the existing country is empty and if the country you are creating does not already exist, Create a new one
             elsif !params[:country][:name_new].empty? && !Country.find_by(name: params[:country][:name_new])
                 cities_array = params[:country][:cities]
 
@@ -48,24 +43,20 @@ class CountriesController < ApplicationController
                 if cities_array[0][:name].empty? && cities_array[1][:name].empty? && cities_array[2][:name].empty?
                     #Trip details are filled 
                     if !cities_array[0][:trip_details].empty? || !cities_array[1][:trip_details].empty? || !cities_array[2][:trip_details].empty?
-
                         redirect '/countries/new'
                     else 
-                        country = current_user.countries.create(name: params[:country][:name_new].titleize)
-                        # Creates a Country that belongs to an User but does not have any cities             
+                        # Creates a Country that belongs to an User but does not have any cities  
+                        country = current_user.countries.create(name: params[:country][:name_new].titleize)          
                         redirect "/countries/#{country.id}"
                     end 
                 else # cities are provided with or without trip_details
                     country = current_user.countries.create(name: params[:country][:name_new].titleize)
-                    #if country.save
                         cities_array.each { |city|
                             if !city[:name].empty? 
                                 new_city = current_user.cities.create(name: city[:name].titleize, trip_details: city[:trip_details])
                                 country.cities << new_city 
                             end 
                         }
-                    
-                    #end 
                 end              
             
             else
@@ -128,7 +119,7 @@ class CountriesController < ApplicationController
             if @country
                 cities = @country.cities.where.not(name: nil).where(user_id: current_user.id)
                     cities.each_with_index do |city, index|
-                    # city and trip details is the same 
+
                     if city.name != params[:cities][index][:name] && city.trip_details == params[:cities][index][:trip_details]
                         city.name = params[:cities][index][:name]
                         city.save
@@ -158,12 +149,8 @@ class CountriesController < ApplicationController
         if logged_in?
             @country = current_user.countries.find_by(id: params[:id])
             if @country
-                binding.pry
                 @country.cities.where(user_id: current_user.id).delete_all
                 current_user.countries.delete(@country)
-                
-                
-                #@country.delete
             end 
             redirect '/countries'
         else 

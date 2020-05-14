@@ -14,7 +14,7 @@ class CitiesController < ApplicationController
     
     
     #Create
-    get "/countries/:id/cities/new" do  #ask Nancy if this works
+    get "/countries/:id/cities/new" do  
         if logged_in? 
             @country = current_user.countries.find_by(id: params[:id])
             erb :"cities/new"

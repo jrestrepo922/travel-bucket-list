@@ -12,22 +12,20 @@
 
 <h2>Travel Bucket List!</h2>
 
-
-
 <div class="row"> 
-    
         
-           
     <% @cities.each do |city| %>
         <% if city.name%> 
-        <% if city.user_id == current_user.id %>
-        <div class="column"> 
-            <div class="card">
-                <h3>City: </h3><p><%= city.name%></p> <br>
-                <h3>Trip Details:</h3> <p><%= city.trip_details%></p>
-            </div>
-        </div>    
-        <%end%> 
+          <%if !city.name.empty?%>
+            <% if city.user_id == current_user.id %>
+                <div class="column"> 
+                    <div class="card">
+                        <h3>City: </h3><p><%= city.name%></p> <br>
+                        <h3>Trip Details:</h3> <p><%= city.trip_details%></p>
+                    </div>
+                </div>    
+            <%end%>
+          <%end%> 
         <%end%>
     <%end%>
         

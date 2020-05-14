@@ -9,10 +9,9 @@ class SessionsController < ApplicationController
     end 
 
     post "/login" do 
-        user = User.find_by(username: params[:username])
-
-        if user && user.authenticate(params[:password]) #where is this coming from bcrypt and has_secure_passwrod
-            session[:user_id] = user.id #once this line is executed the user is log in. 
+        @user = User.find_by(username: params[:username])
+        if @user && @user.authenticate(params[:password])   
+            session[:user_id] = @user.id    
             redirect "/countries"
         else  
             redirect "/login"
@@ -25,3 +24,4 @@ class SessionsController < ApplicationController
         redirect "/login"
     end 
 end 
+    #<%= @user.errors.full_messages if !@user.errors.full_messages.empty?%> goes in new.erb line 3 
