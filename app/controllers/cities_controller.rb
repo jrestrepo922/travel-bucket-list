@@ -11,7 +11,16 @@ class CitiesController < ApplicationController
 
     post "/countries/:id/cities" do 
         if logged_in? 
-            binding.pry
+            
+            country = current_user.countries.find_by(id: params[:id])
+            city = params[:cities]
+
+            if params[:cities][:name].empty?
+                redirect "/countries/#{params[:id]}/cities/new"
+            else
+                new_city = current_user.cities.create(name: city[:name].titleize, trip_details: city[:trip_details])
+                country.cities << new_city 
+            end 
             redirect "/countries/#{country.id}"
         else 
             redirect "/login"

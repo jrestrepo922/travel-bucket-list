@@ -9,18 +9,19 @@
 <div class="container">
   <h1>Update Cities In <%=@country.name%>  !</h1>
   <br>
-  
     <h2>Cities</h2>
+    <br>
+    
     <%count = 1 %>
     <% @country.cities.each do |city| %>
       <% if city.user_id == current_user.id %>
 
         <% if city.name  %>
-          <label for="country[cities][][name]">City No. <%=count%></label></br></br>
-          <input type="text" name="country[cities][][name]" value="<%=city.name%>"></br>
+          <label for="cities[][name]">City No. <%=count%></label></br></br>
+          <input type="text" name="cities[][name]" value="<%=city.name%>"></br>
 
-          <label for="country[cities][][trip_details]">Trip Details</label></br>
-          <input  type="text" name="country[cities][][trip_details]" value="<%=city.trip_details%>"></textarea></br>
+          <label for="cities[][trip_details]">Trip Details</label></br>
+          <input  type="text" name="cities[][trip_details]" value="<%=city.trip_details%>"></textarea></br>
           <% count = count + 1 %>
         <%end%>
       <%end%>

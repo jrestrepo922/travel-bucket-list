@@ -19,3 +19,5 @@ class UsersController < ApplicationController
         end 
     end 
 end 
+
+#<%= @user.errors.full_messages if !@user.errors.full_messages.empty?%> goes in new.erb line 3 
