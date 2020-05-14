@@ -1,0 +1,35 @@
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/cities/cities_index.css"/>
+
+
+
+
+<div class="topnav">
+  <a href='/logout'>Log out</a>
+  <a href="/countries/new">New Country/City</a>
+  <a href="/countries">All my Countries</a>
+  
+</div>
+
+<h2>Travel Bucket List!</h2>
+
+
+
+<div class="row"> 
+    
+        
+           
+    <% @cities.each do |city| %>
+        <% if city.name%> 
+        <% if city.user_id == current_user.id %>
+        <div class="column"> 
+            <div class="card">
+                <h3>City: </h3><p><%= city.name%></p> <br>
+                <h3>Trip Details:</h3> <p><%= city.trip_details%></p>
+            </div>
+        </div>    
+        <%end%> 
+        <%end%>
+    <%end%>
+        
+    
+</div>

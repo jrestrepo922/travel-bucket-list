@@ -1,5 +1,19 @@
 class CitiesController < ApplicationController 
-    #Edit
+    
+    #Read
+    get '/cities' do 
+        if logged_in? 
+            @cities = current_user.cities
+            erb :"/cities/index"
+        else 
+            redirect "/login"
+        end 
+    end 
+    
+    
+    
+    
+    #Create
     get "/countries/:id/cities/new" do  #ask Nancy if this works
         if logged_in? 
             @country = current_user.countries.find_by(id: params[:id])

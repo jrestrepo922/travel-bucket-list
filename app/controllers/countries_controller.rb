@@ -147,9 +147,11 @@ class CountriesController < ApplicationController
         if logged_in?
             @country = current_user.countries.find_by(id: params[:id])
             if @country
-                @country.cities.clear 
+                binding.pry
+                @country.cities.where(user_id: current_user.id).delete_all
                 current_user.countries.delete(@country)
-                #@country.cities.delete_all
+                
+                
                 #@country.delete
             end 
             redirect '/countries'
