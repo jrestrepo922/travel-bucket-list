@@ -1,0 +1,32 @@
+<link rel = "stylesheet" type = "text/css" href = "/stylesheets/countries/countries_explore.css"/>
+
+
+
+
+<div class="topnav">
+  <a href='/logout'>Log out</a>
+  <a href="/countries/new">New Country/City</a>
+  <a href="/cities">All my cities</a>
+  <a href="/countries">All my Countries</a>
+</div>
+
+<h2>Explore Other users Destinations!</h2>
+
+
+
+<div class="row">
+  <% @countries.each do |country| %> 
+    <div class="column">
+        <div class="card">
+           
+           <h2><%=country[:name] %></h2>
+           <% country.cities.uniq.each do |city| %>
+              
+                <h3><%= city.name%></h3> 
+              
+           <%end%>
+        </div>
+    </div>
+  <%end%>
+</div>
+

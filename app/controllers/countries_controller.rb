@@ -85,8 +85,17 @@ class CountriesController < ApplicationController
     get "/countries" do 
         if logged_in? 
             @countries = current_user.countries.uniq
-            #.first.cities.select {|c| c.user_id == current_user.id  }
             erb :"/countries/index"
+        else 
+            redirect "/login"
+        end 
+    end 
+
+
+    get "/countries/explore" do 
+        if logged_in? 
+            @countries = Country.all
+            erb :"/countries/explore"
         else 
             redirect "/login"
         end 
@@ -100,6 +109,8 @@ class CountriesController < ApplicationController
             redirect "/login"
         end 
     end 
+
+
 
     #EDIT
     get "/countries/:id/edit" do 
@@ -115,7 +126,7 @@ class CountriesController < ApplicationController
         if logged_in? 
             @country = current_user.countries.find_by(id: params[:id]) 
             if @country
-                cities = @country.cities.where.not(name: nil)
+                cities = @country.cities.where.not(name: nil).where(user_id: current_user.id)
                     cities.each_with_index do |city, index|
                     # city and trip details is the same 
                     if city.name != params[:cities][index][:name] && city.trip_details == params[:cities][index][:trip_details]

@@ -29,26 +29,5 @@ class ApplicationController < Sinatra::Base
 
   end 
 
-# Will likely be taken out
-  #Read
-  get "/everyone" do 
-    if logged_in? 
-        #Provides an Array of Countries
-        @countries = Country.all
-        erb :"/everyone"
-    else 
-        redirect "/login"
-    end 
-  end 
 
-  get "/everyone/:id" do 
-    if logged_in? 
-        @country = Country.find_by(id: params[:id])
-        binding.pry
-        # uses @country.cities.first.users
-        erb :"/show"
-    else 
-        redirect "/login"
-    end 
-end 
 end
